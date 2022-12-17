@@ -68,10 +68,10 @@ class M7Location
 
 		_right.x = _cf;
 		_right.z = _sf;
-		_up.x = _sf*_st;
-		_up.z = -_cf*_st;
-		_backward.x = -_sf*_ct;
-		_backward.z = _cf*_ct;
+		_up.x = _sf.safe_multiplication(_st);
+		_up.z = -_cf.safe_multiplication(_st);
+		_backward.x = -_sf.safe_multiplication(_ct);
+		_backward.z = _cf.safe_multiplication(_ct);
 	}
 	constexpr void set_theta(int16_t theta)
 	{
@@ -81,13 +81,13 @@ class M7Location
 		bn::fixed _ct = bn::lut_cos(_theta);
 		bn::fixed _st = bn::lut_sin(_theta);
 
-		_up.x = _sf*_st;
+		_up.x = _sf.safe_multiplication(_st);
 		_up.y = _ct;
-		_up.z = -_cf*_st;
+		_up.z = -_cf.safe_multiplication(_st);
 
-		_backward.x = -_sf*_ct;
+		_backward.x = -_sf.safe_multiplication(_ct);
 		_backward.y = _st;
-		_backward.z = _cf*_ct;
+		_backward.z = _cf.safe_multiplication(_ct);
 	}
 	constexpr const bn::fixed& sf() const
 	{
@@ -152,13 +152,13 @@ class M7Location
 		_right.y = 0;
 		_right.z = sf;
 
-		_up.x = sf*st;
+		_up.x = sf.safe_multiplication(st);
 		_up.y = ct;
-		_up.z = -cf*st;
+		_up.z = -cf.safe_multiplication(st);
 
-		_backward.x = -sf*ct;
+		_backward.x = -sf.safe_multiplication(ct);
 		_backward.y = st;
-		_backward.z = cf*ct;
+		_backward.z = cf.safe_multiplication(ct);
 	}
 	int16_t _phi = 0;//!< Azimuth angle.
 	int16_t _theta = 0;//!< Polar angle.

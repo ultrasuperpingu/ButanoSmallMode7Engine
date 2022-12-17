@@ -108,7 +108,7 @@ int main()
 	M7Sprite cowSpr(bn::sprite_items::cow);
 	cowSpr.pos=Vector3(465,0,200);
 	cowSpr.anchor.set_x(32);
-	cowSpr.anchor.set_y(55);
+	cowSpr.anchor.set_y(52);
 	cowSpr.set_phi(1024);
 	cowSpr.handleRotFrames=true;
 	cowSpr.sprite_scale=1.8;
