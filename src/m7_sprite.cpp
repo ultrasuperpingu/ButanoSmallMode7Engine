@@ -103,7 +103,7 @@ void M7Sprite::set_turn_frame(const M7Camera& cam, const Vector3& vc)
 		mirror=true;
 		angle=-angle;
 	}
-	// Ugly quick fix...
+	// Ugly quick fix... TODO: a real fix
 	if(angle > 1024)
 	{
 		angle=1024-(angle-1024);
@@ -113,7 +113,7 @@ void M7Sprite::set_turn_frame(const M7Camera& cam, const Vector3& vc)
 	int nbPos=sprite_item->tiles_item().graphics_count();
 	
 	int index=angle*nbPos/1024;
-	//index%=nbPos;
+	index%=nbPos; // by security
 	if(_last_graphic != index)
 	{
 		_last_graphic=index;
