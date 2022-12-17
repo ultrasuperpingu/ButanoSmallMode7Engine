@@ -103,6 +103,7 @@ void M7Sprite::set_turn_frame(const M7Camera& cam, const Vector3& vc)
 		mirror=true;
 		angle=-angle;
 	}
+	// Ugly quick fix...
 	if(angle > 1024)
 	{
 		angle=1024-(angle-1024);
