@@ -1,7 +1,6 @@
 #include "m7_camera.h"
 
 #include "bn_size.h"
-#include "bn_log.h"
 
 #define INT_MAX 2147483647
 #define INT_MIN -2147483648
@@ -75,7 +74,7 @@ void M7Camera::update()
 	_backdrop->set_y(horiz-80-_backdrop->dimensions().height()/2);
 	_backdrop->set_x(-phi());
 	_internal_window->set_bottom(-80+(horiz > 0 && horiz < bn::display::height()+_backdrop->dimensions().height()?horiz:0));
-	//BN_LOG(_backdrop->x()," " ,_backdrop->y()," ", _internal_window->bottom());
+
 	_pa_hbe->reload_values_ref();
 	_pc_hbe->reload_values_ref();
 	_dx_hbe->reload_values_ref();

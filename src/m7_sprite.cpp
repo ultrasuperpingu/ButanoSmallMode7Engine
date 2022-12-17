@@ -1,7 +1,6 @@
 
 #include "m7_sprite.h"
 #include "m7_camera.h"
-#include "bn_log.h"
 #include "bn_sprite_double_size_mode.h"
 
 class Rect
@@ -72,7 +71,7 @@ void M7Sprite::update(const M7Camera& cam)
 		sprite->set_visible(true);
 		sprite->set_x(xscr);
 		sprite->set_y(yscr);
-		BN_LOG(xscr," ",yscr," ", sprite->horizontal_scale());
+
 		if(handleRotFrames)
 		{
 			set_turn_frame(cam, vc);
