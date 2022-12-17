@@ -103,10 +103,16 @@ void M7Sprite::set_turn_frame(const M7Camera& cam, const Vector3& vc)
 		mirror=true;
 		angle=-angle;
 	}
+	if(angle > 1024)
+	{
+		angle=1024-(angle-1024);
+	}
 	sprite->set_horizontal_flip(mirror);
+
 	int nbPos=sprite_item->tiles_item().graphics_count();
-	int index=angle/(1024/nbPos);
-	index%=nbPos;
+	
+	int index=angle*nbPos/1024;
+	//index%=nbPos;
 	if(_last_graphic != index)
 	{
 		_last_graphic=index;
