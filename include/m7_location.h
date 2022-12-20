@@ -130,7 +130,7 @@ class M7Location
 	{
 		return _backward;
 	}
-	constexpr Vector3 globalToLocal(const Vector3& global) const
+	constexpr Vector3 global_to_local(const Vector3& global) const
 	{
 		Vector3 local;
 		Vector3 vr=global-pos;
@@ -139,6 +139,23 @@ class M7Location
 		local.z=-vr.dot(backward());
 		return local;
 	}
+	inline void look_at(const Vector3& position)
+	{
+		Vector3 diff = position - pos;
+		int phi = (bn::atan2(diff.z.round_integer(), diff.x.round_integer()) * 2048).round_integer()+512;
+		if(phi < 0)
+			phi+=2048;
+		if(phi >= 2048)
+			phi-=2048;
+		
+		bn::fixed diffY=position.y - pos.y;
+		diff.y=0;
+		int theta = (bn::atan2(-diffY.round_integer(), diff.norm().round_integer()) * 2048).round_integer();
+		if(theta < 0)
+			theta+=2048;
+		set_orientation(phi, theta);
+	}
+	
 	Vector3 pos;
 	protected:
 	constexpr void _update()

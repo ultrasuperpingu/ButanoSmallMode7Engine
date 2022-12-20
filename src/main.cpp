@@ -101,9 +101,6 @@ int main()
 	//backdrop.set_priority(3);
 	bn::affine_bg_ptr floor = bn::affine_bg_items::land.create_bg(0, 0);
 	
-	M7Camera camera(floor, backdrop, true);
-	camera.pos=Vector3(460,50,286);
-	camera.set_orientation(5, 140);
 	
 	M7Sprite cowSpr(bn::sprite_items::cow);
 	cowSpr.pos=Vector3(465,0,200);
@@ -113,11 +110,17 @@ int main()
 	cowSpr.handleRotFrames=true;
 	cowSpr.sprite_scale=1.8;
 
+	M7Camera camera(floor, backdrop, true);
+	camera.pos=Vector3(460,50,286);
+	//camera.set_orientation(5, 140);
+	camera.look_at(cowSpr.pos+Vector3(0,2,0));
 	
 	
 	while(true)
 	{
 		update_camera(camera);
+		if(bn::keypad::start_pressed())
+			camera.look_at(cowSpr.pos+Vector3(0,2,0));
 		camera.update();
 		cowSpr.update(camera);
 		bn::core::update();

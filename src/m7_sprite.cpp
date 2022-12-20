@@ -26,7 +26,7 @@ void M7Sprite::update(const M7Camera& cam)
 	int sx, sy;		// Object size
 	Rect rect;		// Object rectangle 
 
-	vc=cam.globalToLocal(pos);
+	vc=cam.global_to_local(pos);
 
 	sx= sprite->shape_size().width();
 	sy= sprite->shape_size().height();
