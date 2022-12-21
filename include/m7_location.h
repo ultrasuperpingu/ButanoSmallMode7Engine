@@ -223,3 +223,16 @@ inline bn::ostringstream& operator<<(bn::ostringstream& stream, const M7Location
 	stream << "(" << l.pos << ", " << l.phi() << ", " << l.theta() << ")";
 	return stream;
 }
+
+constexpr int normalize_angle(int angle)
+{
+	while(angle < 0)
+	{
+		angle+=2048;
+	}
+	while(angle > 2047)
+	{
+		angle-=2048;
+	}
+	return angle;
+}

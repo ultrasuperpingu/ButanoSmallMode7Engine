@@ -7,6 +7,13 @@
 
 class M7Camera;
 
+enum TurnFramesMode
+{
+	HALF,
+	FULL,
+	//TODO: LUT
+};
+
 class M7Sprite : public M7Location
 {
 	public:
@@ -16,31 +23,36 @@ class M7Sprite : public M7Location
 	
 	constexpr bool hidden() const
 	{
-		return _hidden || !sprite.has_value();
+		return _hidden || !_sprite.has_value();
 	}
 	constexpr void set_hidden(bool hidden)
 	{
 		_hidden = hidden;
-		if(_hidden && sprite.has_value())
+		if(_hidden && _sprite.has_value())
 		{
-			sprite->set_visible(false);
+			_sprite->set_visible(false);
 		}
 	}
 	
 	constexpr bool visible() const
 	{
-		return !_hidden && sprite.has_value() && sprite->visible();
+		return !_hidden && _sprite.has_value() && _sprite->visible();
 	}
 	
-	
-	bn::fixed sprite_scale=1;
-	bool handleRotFrames=true;
+	constexpr const bn::optional<bn::sprite_ptr>& sprite() const
+	{
+		return _sprite;
+	}
+	bn::fixed sprite_scale=0.25;
 	bn::point anchor;
+	bool handleRotFrames=true;
+	TurnFramesMode turnFramesMode = HALF;
 
 	protected:
-	void set_turn_frame(const M7Camera& cam, const Vector3& vc);
-	bn::optional<bn::sprite_ptr> sprite;
-	bn::optional<bn::sprite_item> sprite_item;
+	void set_turn_frame_half(const M7Camera& cam, const Vector3& vc);
+	void set_turn_frame_full(const M7Camera& cam, const Vector3& vc);
+	bn::optional<bn::sprite_ptr> _sprite;
+	bn::optional<bn::sprite_item> _sprite_item;
 	int _last_graphic;
 	bool _hidden;
 };

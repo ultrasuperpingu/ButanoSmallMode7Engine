@@ -1,6 +1,7 @@
 #include "m7_camera.h"
 
 #include "bn_size.h"
+#include "bn_log.h"
 
 #define INT_MAX 2147483647
 #define INT_MIN -2147483648
@@ -68,6 +69,11 @@ void M7Camera::update()
 			auto fogval=lam*_fog_intensity>>8;
 			if(fogval>256)
 				fogval=256;
+			if(fogval<0)
+			{
+				BN_LOG(index," ", lam, " ", horiz);
+				fogval=0;
+			}
 			_blend_values[index].set_value(bn::fixed::from_data(fogval<<4));
 		}
 	}
@@ -99,4 +105,3 @@ void M7Camera::set_fog(bool fog)
 	}
 	_fog = fog;
 }
-	

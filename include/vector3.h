@@ -126,6 +126,11 @@ class Vector3
 		// can't normalize an empty vector, just returning it;
 		return *this;
 	}
+	constexpr Vector3 normalized() const
+	{
+		Vector3 res(*this);
+		return res.normalize();
+	}
 };
 
 constexpr Vector3 operator*(const bn::fixed& c, const Vector3& v)

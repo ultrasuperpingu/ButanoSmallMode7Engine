@@ -45,7 +45,7 @@ class M7Camera : public M7Location
 	}
 	constexpr void set_fog_intensity(int intensity)
 	{
-		assert(intensity >= 0);
+		BN_ASSERT(intensity >= 0);
 		_fog_intensity=intensity;
 	}
 	protected:
