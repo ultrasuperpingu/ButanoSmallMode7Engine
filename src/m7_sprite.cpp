@@ -10,7 +10,7 @@ class Rect
 	int right, bottom; 
 };
 
-M7Sprite::M7Sprite(const bn::sprite_item& item) : _sprite_item(item)
+M7Sprite::M7Sprite(const bn::sprite_item& item) : _sprite_item(item), _last_graphic(-1), _hidden(false)
 {
 	_sprite = item.create_sprite(0,0);
 	_sprite->set_double_size_mode(bn::sprite_double_size_mode::ENABLED);
