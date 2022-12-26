@@ -103,10 +103,10 @@ M7Sprite* findClosestSprite(M7Sprite* sprites, int count)
 	{
 		if(sprites[i].visible())
 		{
-			bn::fixed manhattanDist=sprites[i].sprite()->x()*sprites[i].sprite()->x()+sprites[i].sprite()->y()*sprites[i].sprite()->y();
-			if(closestDist > manhattanDist)
+			bn::fixed squareDist=sprites[i].sprite()->x()*sprites[i].sprite()->x()+sprites[i].sprite()->y()*sprites[i].sprite()->y();
+			if(closestDist > squareDist)
 			{
-				closestDist = manhattanDist;
+				closestDist = squareDist;
 				closest = &(sprites[i]);
 			}
 		}
