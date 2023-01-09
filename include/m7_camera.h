@@ -48,6 +48,26 @@ class M7Camera : public M7Location
 		BN_ASSERT(intensity >= 0);
 		_fog_intensity=intensity;
 	}
+	inline void set_visible(bool v)
+	{
+		_floor->set_visible(v);
+		_backdrop->set_visible(v);
+	}
+	inline void destroy()
+	{
+		_internal_window->restore_boundaries();
+		_internal_window->set_show_nothing();
+		bn::window outside_window = bn::window::outside();
+		outside_window.set_show_all();
+		_pa_hbe.reset();
+		_pc_hbe.reset();
+		_dx_hbe.reset();
+		_dy_hbe.reset();
+		_blend_hbe.reset();
+		_internal_window.reset();
+		_floor.reset();
+		_backdrop.reset();
+	}
 	protected:
 	int16_t _pa_values[bn::display::height()];
 	bn::optional<bn::affine_bg_pa_register_hbe_ptr> _pa_hbe;

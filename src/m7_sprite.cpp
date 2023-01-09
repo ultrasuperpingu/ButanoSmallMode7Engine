@@ -159,7 +159,7 @@ void M7Sprite::set_turn_frame_half(const M7Camera& cam, const Vector3& vc)
 		index = 1+(angle-halfSection)/section;
 	}
 #endif
-	BN_LOG("half angle ", angle," index", index);
+	//BN_LOG("half angle ", angle," index", index);
 	if(_last_graphic != index)
 	{
 		_last_graphic=index;
@@ -185,7 +185,7 @@ void M7Sprite::set_turn_frame_full(const M7Camera& cam, const Vector3& vc)
 	}
 	index%=nbPos;
 #endif
-	BN_LOG("full angle ", angle," index", index);
+	//BN_LOG("full angle ", angle," index", index);
 	if(_last_graphic != index)
 	{
 		_last_graphic=index;

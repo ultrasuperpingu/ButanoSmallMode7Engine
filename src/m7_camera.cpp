@@ -8,10 +8,10 @@
 
 M7Camera::M7Camera(const bn::affine_bg_ptr& bg, const bn::regular_bg_ptr& backdrop_, bool fog, int fog_intensity) : _floor(bg), _backdrop(backdrop_), _fog(false), _fog_intensity(fog_intensity)
 {
-	_pa_hbe = bn::affine_bg_pa_register_hbe_ptr::create(bg, _pa_values);
-	_pc_hbe = bn::affine_bg_pc_register_hbe_ptr::create(bg, _pc_values);
-	_dx_hbe = bn::affine_bg_dx_register_hbe_ptr::create(bg, _dx_values);
-	_dy_hbe = bn::affine_bg_dy_register_hbe_ptr::create(bg, _dy_values);
+	_pa_hbe = bn::affine_bg_pa_register_hbe_ptr::create_optional(bg, _pa_values);
+	_pc_hbe = bn::affine_bg_pc_register_hbe_ptr::create_optional(bg, _pc_values);
+	_dx_hbe = bn::affine_bg_dx_register_hbe_ptr::create_optional(bg, _dx_values);
+	_dy_hbe = bn::affine_bg_dy_register_hbe_ptr::create_optional(bg, _dy_values);
 	set_fog(fog);
 	bn::window outside_window = bn::window::outside();
 	outside_window.set_show_bg(*_backdrop, false);
@@ -100,8 +100,9 @@ void M7Camera::set_fog(bool fog)
 	}
 	if(!_fog && fog)
 	{
-		_blend_hbe = bn::blending_fade_alpha_hbe_ptr::create(_blend_values);
+		_blend_hbe = bn::blending_fade_alpha_hbe_ptr::create_optional(_blend_values);
 		_floor->set_blending_enabled(true);
 	}
 	_fog = fog;
 }
+	
